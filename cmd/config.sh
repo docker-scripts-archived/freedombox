@@ -11,6 +11,9 @@ cmd_config() {
     ds inject debian-fixes.sh
     ds inject setup.sh
     ds inject install-plinth.sh
+    ds restart
+    ds exec plinth &
+
 }
 
 

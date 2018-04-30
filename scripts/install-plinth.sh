@@ -12,39 +12,30 @@ apt-get -y install \
    network-manager \
    ppp \
    pppoe \
-   # python3 \
-   # python3-apt \
-   # python3-augeas \
-   # python3-bootstrapform \
-   # python3-cherrypy3 \
-   # python3-configobj \
-   # python3-coverage \
-   # python3-django \
-   # python3-django-axes \
-   # python3-django-captcha \
-   # python3-django-stronghold \
-   # python3-gi \
-   # python3-psutil \
-   # python3-requests \
-   # python3-ruamel.yaml \
-   # python3-setuptools \
-   # augeas-tools \
-   # dblatex \
-   # docbook-utils \
-   # e2fsprogs \
-   # fonts-lato \
-   # gettext \
-   # gir1.2-glib-2.0 \
-   # gir1.2-nm-1.0 \
-   # ldapscripts \
-   # libjs-bootstrap \
-   # libjs-jquery \
-   # libjs-modernizr \
-   # xmlto
+
 git clone https://salsa.debian.org/freedombox-team/plinth.git && \
-cd plinth && python3 setup.py install
+cd plinth
+sed -e 's/^use_x_forwarded_host = True/use_x_forwarded_host = False/' -i data/etc/plinth/plinth.config 
+sed -e 's/^secure_proxy_ssl_header = HTTP_X_FORWARDED_PROTO/secure_proxy_ssl_header = None/' -i data/etc/plinth/plinth.config 
+python3 setup.py install
 apt install -y $(plinth --list-dependencies)
-# # # plinth
-# rm /var/cache/debconf/*.dat
-# dpkg-reconfigure debconf
-#plinth --setup-no-install users
+
+
+
+# Hack to reconfigure LDAP. Issue #4
+# Wait until plinth throw users LDAP error. 
+# Then pkill it.
+plinth &
+sleep 90
+pkill plinth
+# Then in config.sh we ds restart
+
+# Alternative way
+# apt install -y expect
+# cmd='
+# set timeout 240
+# spawn plinth
+# expect "Error executing command"
+# send \003
+# interact'
+# expect -c "${cmd}"

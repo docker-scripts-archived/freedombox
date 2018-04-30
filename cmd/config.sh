@@ -8,8 +8,11 @@ _EOF
 
 cmd_config() {
     # run standard config scripts
-    ds inject ubuntu-fixes.sh
+    # ds inject ubuntu-fixes.sh
     ds inject set_prompt.sh
+    ds inject install-plinth.sh
+
+
     # ds inject ssmtp.shs
     # ds inject mariadb.sh
     # ds inject apache2.sh
@@ -29,5 +32,5 @@ cmd_config() {
     # ds install-plugins
 
     # cleanup
-    ds cc
+    # ds cc
 }

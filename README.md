@@ -1,4 +1,4 @@
-moodle
+Freedombox
 ======
 
 Docker scripts that install and run Moodle in a container.

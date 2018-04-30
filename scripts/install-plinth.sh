@@ -2,7 +2,7 @@
 
 source /host/settings.sh
 
-DEBIAN_FRONTEND=noninteractive apt-get -y install plinth
+# DEBIAN_FRONTEND=noninteractive apt-get -y install plinth
 
 apt-get -y install \
    augeas-tools \

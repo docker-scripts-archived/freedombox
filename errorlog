@@ -1,0 +1,228 @@
+# If /usr/share/plinth/actions/user main function is commented out
+
+(freedombox1-example-org)root@freedombox1-example-org:~# [2018-04-24 02:09:41,564] django.security.DisallowedHost ERROR    Invalid HTTP_HOST header: 'plinth.example.org, plinth.example.org'. The domain name provided is not valid according to RFC 1034/1035.
+
+# normal no edit
+# 
+
+ssh
+names
+help
+first_boot
+firewall
+config
+security
+apache
+datetime
+sso
+diagnostics
+users
+power
+networks
+letsencrypt
+upgrades
+avahi
+(freedombox1-example-org)root@freedombox1-example-org:/usr/local/lib/python3.6/dist-packages/plinth# plinth
+[2018-04-24 01:52:32,499] plinth.__main__ INFO     Configuration loaded from file - /etc/plinth/plinth.config
+[2018-04-24 01:52:32,499] plinth.__main__ INFO     Script prefix - /plinth
+[2018-04-24 01:52:32,509] axes.watch_login INFO     AXES: BEGIN LOG
+[2018-04-24 01:52:32,510] axes.watch_login INFO     AXES: Using django-axes 4.1.0
+[2018-04-24 01:52:32,510] axes.watch_login INFO     AXES: blocking by IP only.
+[2018-04-24 01:52:32,659] plinth.module_loader INFO     Module load order - ['roundcube', 'deluge', 'ttrss', 'quassel', 'ssh', 'names', 'pagekite', 'api', 'help', 'ikiwiki', 'openvpn', 'searx', 'tahoe', 'mumble', 'mediawiki', 'first_boot', 'tor', 'infinoted', 'firewall', 'config', 'security', 'apache', 'dynamicdns', 'bind', 'snapshot', 'minetest', 'ejabberd', 'datetime', 'monkeysphere', 'sharing', 'coquelicot', 'storage', 'sso', 'repro', 'diagnostics', 'jsxc', 'users', 'power', 'networks', 'privoxy', 'shadowsocks', 'transmission', 'matrixsynapse', 'letsencrypt', 'upgrades', 'cockpit', 'syncthing', 'radicale', 'avahi']
+[2018-04-24 01:52:36,252] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/pagekite', 'is-disabled']
+Unit pagekite.service could not be found.
+[2018-04-24 01:52:36,623] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/pagekite', 'get-kite']
+[2018-04-24 01:52:43,775] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/dynamicdns', 'status']
+[2018-04-24 01:52:55,753] plinth.setup   INFO     Running first setup.
+[2018-04-24 01:52:55,753] plinth.__main__ INFO     Setting up CherryPy server
+[2018-04-24 01:52:55,754] plinth.setup   INFO     Running setup for modules, essential - True, selected modules - None
+[2018-04-24 01:52:55,773] plinth.setup   INFO     Running module setup - users
+[2018-04-24 01:52:56,645] plinth.setup   INFO     Running step for module - users, step - post
+[2018-04-24 01:52:56,646] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'first-setup']
+[24/Apr/2018:01:52:56] ENGINE Listening for SIGTERM.
+[24/Apr/2018:01:52:56] ENGINE Listening for SIGHUP.
+[24/Apr/2018:01:52:56] ENGINE Listening for SIGUSR1.
+[24/Apr/2018:01:52:56] ENGINE Bus STARTING
+[24/Apr/2018:01:52:56] ENGINE Started monitor thread '_TimeoutMonitor'.
+[24/Apr/2018:01:52:56] ENGINE Serving on http://127.0.0.1:8000
+[24/Apr/2018:01:52:56] ENGINE Bus STARTED
+[2018-04-24 01:52:57,048] plinth.setup   INFO     Running step for module - users, step - post
+[2018-04-24 01:52:57,049] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'setup']
+[2018-04-24 01:52:59,172] plinth.actions ERROR    Error executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'setup'], , Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+invoke-rc.d: policy-rc.d denied execution of restart.
+Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+debconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch
+slapd.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable slapd
+nslcd.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable nslcd
+ldap_add: Server is unwilling to perform (53)
+	additional info: no global superior knowledge
+Traceback (most recent call last):
+  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit
+    ], stdout=subprocess.DEVNULL, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ldapsearch', '-Q', '-Y', 'EXTERNAL', '-H', 'ldapi:///', '-s', 'base', '-b', 'ou=users,dc=thisbox', '(objectclass=*)']' returned non-zero exit status 32.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/share/plinth/actions/users", line 374, in <module>
+    main()
+  File "/usr/share/plinth/actions/users", line 370, in main
+    subcommand_method(arguments)
+  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup
+    configure_ldap_structure()
+  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure
+    create_organizational_unit('users')
+  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit
+    stdout=subprocess.DEVNULL, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ldapadd', '-Q', '-Y', 'EXTERNAL', '-H', 'ldapi:///']' returned non-zero exit status 53.
+
+[2018-04-24 01:52:59,172] plinth.setup   ERROR    Error running setup - ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/plinth/setup.py", line 88, in run
+    self.module.setup(self, old_version=current_version)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/modules/users/__init__.py", line 62, in setup
+    helper.call('post', actions.superuser_run, 'users', ['setup'])
+  File "/usr/local/lib/python3.6/dist-packages/plinth/setup.py", line 129, in call
+    return method(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/actions.py", line 118, in superuser_run
+    log_error=log_error)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/actions.py", line 190, in _run
+    raise ActionError(action, output, error)
+plinth.errors.ActionError: ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:52:59,175] plinth.setup   ERROR    Error running setup - ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:52:59,176] plinth.setup   WARNING  Unable to complete setup: ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:52:59,176] plinth.setup   INFO     Will try again in 10 seconds
+[2018-04-24 01:53:09,183] plinth.setup   INFO     Running first setup.
+[2018-04-24 01:53:09,184] plinth.setup   INFO     Running setup for modules, essential - True, selected modules - None
+[2018-04-24 01:53:09,201] plinth.setup   INFO     Running module setup - users
+[2018-04-24 01:53:10,065] plinth.setup   INFO     Running step for module - users, step - post
+[2018-04-24 01:53:10,065] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'first-setup']
+[2018-04-24 01:53:10,443] plinth.setup   INFO     Running step for module - users, step - post
+[2018-04-24 01:53:10,444] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'setup']
+[2018-04-24 01:53:12,626] plinth.actions ERROR    Error executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'setup'], , Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+invoke-rc.d: policy-rc.d denied execution of restart.
+Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+debconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch
+slapd.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable slapd
+nslcd.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable nslcd
+ldap_add: Server is unwilling to perform (53)
+	additional info: no global superior knowledge
+Traceback (most recent call last):
+  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit
+    ], stdout=subprocess.DEVNULL, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ldapsearch', '-Q', '-Y', 'EXTERNAL', '-H', 'ldapi:///', '-s', 'base', '-b', 'ou=users,dc=thisbox', '(objectclass=*)']' returned non-zero exit status 32.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/share/plinth/actions/users", line 374, in <module>
+    main()
+  File "/usr/share/plinth/actions/users", line 370, in main
+    subcommand_method(arguments)
+  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup
+    configure_ldap_structure()
+  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure
+    create_organizational_unit('users')
+  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit
+    stdout=subprocess.DEVNULL, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ldapadd', '-Q', '-Y', 'EXTERNAL', '-H', 'ldapi:///']' returned non-zero exit status 53.
+
+[2018-04-24 01:53:12,627] plinth.setup   ERROR    Error running setup - ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/plinth/setup.py", line 88, in run
+    self.module.setup(self, old_version=current_version)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/modules/users/__init__.py", line 62, in setup
+    helper.call('post', actions.superuser_run, 'users', ['setup'])
+  File "/usr/local/lib/python3.6/dist-packages/plinth/setup.py", line 129, in call
+    return method(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/actions.py", line 118, in superuser_run
+    log_error=log_error)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/actions.py", line 190, in _run
+    raise ActionError(action, output, error)
+plinth.errors.ActionError: ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:53:12,628] plinth.setup   ERROR    Error running setup - ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:53:12,628] plinth.setup   WARNING  Unable to complete setup: ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:53:12,629] plinth.setup   INFO     Will try again in 10 seconds
+[2018-04-24 01:53:22,639] plinth.setup   INFO     Running first setup.
+[2018-04-24 01:53:22,640] plinth.setup   INFO     Running setup for modules, essential - True, selected modules - None
+[2018-04-24 01:53:22,652] plinth.setup   INFO     Running module setup - users
+[2018-04-24 01:53:23,510] plinth.setup   INFO     Running step for module - users, step - post
+[2018-04-24 01:53:23,510] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'first-setup']
+[2018-04-24 01:53:23,881] plinth.setup   INFO     Running step for module - users, step - post
+[2018-04-24 01:53:23,882] plinth.actions INFO     Executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'setup']
+[2018-04-24 01:53:25,998] plinth.actions ERROR    Error executing command - ['sudo', '-n', '/usr/share/plinth/actions/users', 'setup'], , Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+invoke-rc.d: policy-rc.d denied execution of restart.
+Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.
+debconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch
+slapd.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable slapd
+nslcd.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable nslcd
+ldap_add: Server is unwilling to perform (53)
+	additional info: no global superior knowledge
+Traceback (most recent call last):
+  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit
+    ], stdout=subprocess.DEVNULL, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ldapsearch', '-Q', '-Y', 'EXTERNAL', '-H', 'ldapi:///', '-s', 'base', '-b', 'ou=users,dc=thisbox', '(objectclass=*)']' returned non-zero exit status 32.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/share/plinth/actions/users", line 374, in <module>
+    main()
+  File "/usr/share/plinth/actions/users", line 370, in main
+    subcommand_method(arguments)
+  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup
+    configure_ldap_structure()
+  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure
+    create_organizational_unit('users')
+  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit
+    stdout=subprocess.DEVNULL, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ldapadd', '-Q', '-Y', 'EXTERNAL', '-H', 'ldapi:///']' returned non-zero exit status 53.
+
+[2018-04-24 01:53:25,998] plinth.setup   ERROR    Error running setup - ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/plinth/setup.py", line 88, in run
+    self.module.setup(self, old_version=current_version)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/modules/users/__init__.py", line 62, in setup
+    helper.call('post', actions.superuser_run, 'users', ['setup'])
+  File "/usr/local/lib/python3.6/dist-packages/plinth/setup.py", line 129, in call
+    return method(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/actions.py", line 118, in superuser_run
+    log_error=log_error)
+  File "/usr/local/lib/python3.6/dist-packages/plinth/actions.py", line 190, in _run
+    raise ActionError(action, output, error)
+plinth.errors.ActionError: ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:53:25,999] plinth.setup   ERROR    Error running setup - ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:53:26,000] plinth.setup   WARNING  Unable to complete setup: ('users', '', 'Use of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ninvoke-rc.d: policy-rc.d denied execution of restart.\nUse of uninitialized value $item in hash element at /usr/share/perl5/Debconf/DbDriver/File.pm line 85, <__ANONIO__> chunk 1.\ndebconf: DbDriver "_ENV_stack": unable to save changes to: libnss-ldapd/nsswitch\nslapd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable slapd\nnslcd.service is not a native service, redirecting to systemd-sysv-install.\nExecuting: /lib/systemd/systemd-sysv-install enable nslcd\nldap_add: Server is unwilling to perform (53)\n\tadditional info: no global superior knowledge\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 153, in create_organizational_unit\n    ], stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapsearch\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\', \'-s\', \'base\', \'-b\', \'ou=users,dc=thisbox\', \'(objectclass=*)\']\' returned non-zero exit status 32.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "/usr/share/plinth/actions/users", line 374, in <module>\n    main()\n  File "/usr/share/plinth/actions/users", line 370, in main\n    subcommand_method(arguments)\n  File "/usr/share/plinth/actions/users", line 113, in subcommand_setup\n    configure_ldap_structure()\n  File "/usr/share/plinth/actions/users", line 142, in configure_ldap_structure\n    create_organizational_unit(\'users\')\n  File "/usr/share/plinth/actions/users", line 163, in create_organizational_unit\n    stdout=subprocess.DEVNULL, check=True)\n  File "/usr/lib/python3.6/subprocess.py", line 418, in run\n    output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command \'[\'ldapadd\', \'-Q\', \'-Y\', \'EXTERNAL\', \'-H\', \'ldapi:///\']\' returned non-zero exit status 53.\n')
+[2018-04-24 01:53:26,000] plinth.setup   INFO     Will try again in 10 seconds
+^C[24/Apr/2018:01:53:28] ENGINE Keyboard Interrupt: shutting down bus
+[24/Apr/2018:01:53:28] ENGINE Bus STOPPING
+[24/Apr/2018:01:53:28] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8000)) shut down
+[24/Apr/2018:01:53:28] ENGINE Stopped thread '_TimeoutMonitor'.
+[24/Apr/2018:01:53:28] ENGINE Bus STOPPED
+[24/Apr/2018:01:53:28] ENGINE Bus EXITING
+[24/Apr/2018:01:53:28] ENGINE Bus EXITED
+[24/Apr/2018:01:53:28] ENGINE Waiting for child threads to terminate...
+[24/Apr/2018:01:53:28] ENGINE Waiting for thread Thread-1.
+[2018-04-24 01:53:36,003] plinth.setup   INFO     Setup thread finished.
+(freedombox1-example-org)root@freedombox1-example-org:/usr/local/lib/python3.6/dist-packages/plinth# 

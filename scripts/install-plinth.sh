@@ -42,5 +42,5 @@ git clone https://salsa.debian.org/freedombox-team/plinth.git && \
 cd plinth && python3 setup.py install
 DEBIAN_FRONTEND=noninteractive apt install -y $(plinth --list-dependencies)
 # # plinth
-# sudo rm /var/cache/debconf/*.dat
-# sudo dpkg-reconfigure debconf
+rm /var/cache/debconf/*.dat
+DEBIAN_FRONTEND=noninteractive dpkg-reconfigure debconf

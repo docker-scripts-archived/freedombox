@@ -5,13 +5,8 @@ source /host/settings.sh
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 
-DEBIAN_FRONTEND=noninteractive apt-get -y install freedombox-setup
-/usr/lib/freedombox/setup | tee freedombox-setup.log
-sed -e 's/^use_x_forwarded_host = True/use_x_forwarded_host = False/' -i /etc/plinth/plinth.config 
-sed -e 's/^secure_proxy_ssl_header = HTTP_X_FORWARDED_PROTO/secure_proxy_ssl_header = None/' -i /etc/plinth/plinth.config
-for f in /usr/lib/freedombox/first-run.d/* ; do 
-  $f
-done
+DEBIAN_FRONTEND=noninteractive apt-get -y install plinth
+
 # apt-get -y install \
 #    make \
 #    network-manager \

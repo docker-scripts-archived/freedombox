@@ -9,10 +9,10 @@ _EOF
 cmd_config() {
     # run standard config scripts
     ds inject debian-fixes.sh
-    ds inject setup.sh
     ds inject install-plinth.sh
     ds restart
-    ds exec plinth &
+    # ds exec ``
+
 
 }
 

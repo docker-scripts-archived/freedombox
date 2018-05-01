@@ -1,10 +1,10 @@
-FROM debian:buster
+FROM debian:stable
 ENV container docker
 ENV TERM dumb
 
 ### install systemd
 RUN apt update 
-RUN apt-get install -y dialog apt-utils 
+# RUN apt-get install -y dialog apt-utils 
 #&& apt -y upgrade
 RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 RUN apt -y install systemd resolvconf
@@ -23,32 +23,32 @@ RUN apt-get update && \
 
 RUN apt-get -y install sudo
 
-RUN apt-get -y install augeas-tools \
-   dblatex \
-   docbook-utils \
-   e2fsprogs \
-   fonts-lato \
-   gettext \
-   gir1.2-glib-2.0 \
-   gir1.2-nm-1.0 \
-   ldapscripts \
-   libjs-bootstrap \
-   libjs-jquery \
-   libjs-modernizr \
-   python3 \
-   python3-apt \
-   python3-augeas \
-   python3-bootstrapform \
-   python3-cherrypy3 \
-   python3-configobj \
-   python3-coverage \
-   python3-django \
-   python3-django-axes \
-   python3-django-captcha \
-   python3-django-stronghold \
-   python3-gi \
-   python3-psutil \
-   python3-requests \
-   python3-ruamel.yaml \
-   python3-setuptools \
-   xmlto
+# RUN apt-get -y install augeas-tools \
+#    dblatex \
+#    docbook-utils \
+#    e2fsprogs \
+#    fonts-lato \
+#    gettext \
+#    gir1.2-glib-2.0 \
+#    gir1.2-nm-1.0 \
+#    ldapscripts \
+#    libjs-bootstrap \
+#    libjs-jquery \
+#    libjs-modernizr \
+#    python3 \
+#    python3-apt \
+#    python3-augeas \
+#    python3-bootstrapform \
+#    python3-cherrypy3 \
+#    python3-configobj \
+#    python3-coverage \
+#    python3-django \
+#    python3-django-axes \
+#    python3-django-captcha \
+#    python3-django-stronghold \
+#    python3-gi \
+#    python3-psutil \
+#    python3-requests \
+#    python3-ruamel.yaml \
+#    python3-setuptools \
+#    xmlto

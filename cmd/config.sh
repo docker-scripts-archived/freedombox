@@ -7,10 +7,12 @@ _EOF
 }
 
 cmd_config() {
-    # run standard config scripts
     ds inject debian-fixes.sh
-    ds inject setup.sh
-    ds inject install-plinth.sh
+    ds inject ssmtp.sh
+
+    ds inject freedombox-setup.sh
+    ds inject fix-django-problem.sh
+    ds restart
 }
 
 

@@ -14,7 +14,7 @@ cmd_config() {
         || git clone https://salsa.debian.org/freedombox-team/plinth
 
     ds inject fix-django-problem.sh
-    ds setup
+    ds setup develop
     ds inject install-dependencies.sh
 
     ds restart

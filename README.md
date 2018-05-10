@@ -1,61 +1,40 @@
-Freedombox
-======
+# FreedomBox in a Container
 
 Docker scripts that install and run Freedombox in a container.
 
-## Install
+## Installation
 
   - First install `ds` and `wsproxy`:
      + https://github.com/docker-scripts/ds#installation
      + https://github.com/docker-scripts/wsproxy#installation
 
-  - Then get the freedombox scripts from github: `ds pull freedombox`
+  - Then get the scripts from github: `ds pull freedombox dev`
 
-  - Create a directory for the freedombox container: `ds init freedombox @freedombox1`
+  - Create a directory for the container: `ds init freedombox-dev @fbdev`
 
-  - Fix the settings:
-    ```
-    cd /var/ds/freedombox1/
-    vim settings.sh
-    ds info
-    ```
+  - Fix the settings: `cd /var/ds/fbdev/ ; vim settings.sh`
 
-  - Create the container and install freedombox: `ds make`
-
-    *Note:* This will pull the image from DockerHub. To build the
-    image yourself use `ds build` first, however this is usually
-    slower.
-
+  - Build image, create the container and configure it: `ds make`
 
 ## Access the website
 
-If the domain is a real one, tell `wsproxy` to get a free
-letsencrypt.org SSL certificate for it:
-```
-ds wsproxy ssl-cert --test
-ds wsproxy ssl-cert
-```
+  - Add the domain of freedombox to `wsproxy`: `ds wsproxy add`
 
-If the domain is not a real one, add to `/etc/hosts` the line
-`127.0.0.1 freedombox.example.org`
+  - Add to `/etc/hosts` the line: `127.0.0.1 fbdev.example.org`
 
-Now you can access the website at: https://freedombox.example.org
+  - Now you can access the website at: https://fbdev.example.org
 
+  - You also need to make a `ds restart` in order for it to work
+    normally.
 
-## Other commands
+## Maintenance
 
-```
-ds shell
-ds stop
-ds start
-ds help
-```
+    ```
+    ds restart
+    ds shell
+    ds help
 
-## Backup and restore
-
-```
-ds backup
-ds backup +data
-ds restore backup-file.tgz
-```
-
+    ds setup
+    ds setup install
+    ds inject install-dependencies.sh
+    ```

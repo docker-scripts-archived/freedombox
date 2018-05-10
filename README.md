@@ -1,61 +1,46 @@
-Freedombox
-======
+# FreedomBox in a Container
 
 Docker scripts that install and run Freedombox in a container.
 
-## Install
+## Installation
 
   - First install `ds` and `wsproxy`:
      + https://github.com/docker-scripts/ds#installation
      + https://github.com/docker-scripts/wsproxy#installation
 
-  - Then get the freedombox scripts from github: `ds pull freedombox`
+  - Then get the scripts from github: `ds pull freedombox`
 
-  - Create a directory for the freedombox container: `ds init freedombox @freedombox1`
+  - Create a directory for the container: `ds init freedombox @freedombox`
 
-  - Fix the settings:
-    ```
-    cd /var/ds/freedombox1/
-    vim settings.sh
-    ds info
-    ```
+  - Fix the settings: `cd /var/ds/freedombox/ ; vim settings.sh`
 
-  - Create the container and install freedombox: `ds make`
-
-    *Note:* This will pull the image from DockerHub. To build the
-    image yourself use `ds build` first, however this is usually
-    slower.
-
+  - Build image, create the container and configure it: `ds make`
 
 ## Access the website
 
-If the domain is a real one, tell `wsproxy` to get a free
-letsencrypt.org SSL certificate for it:
-```
-ds wsproxy ssl-cert --test
-ds wsproxy ssl-cert
-```
+  - Add the domain of freedombox to `wsproxy`: `ds wsproxy add`
 
-If the domain is not a real one, add to `/etc/hosts` the line
-`127.0.0.1 freedombox.example.org`
+  - If the domain is a real one, tell `wsproxy` to get a free
+    letsencrypt.org SSL certificate for it: `ds wsproxy ssl-cert`
 
-Now you can access the website at: https://freedombox.example.org
+  - If the domain is not a real one, add to `/etc/hosts` the line:
+    `127.0.0.1 freedombox.example.org`
 
+  - Now you can access the website at: https://freedombox.example.org
 
-## Other commands
+## Maintenance
 
-```
-ds shell
-ds stop
-ds start
-ds help
-```
+    ```
+    ds stop
+    ds start
+    ds shell
+    ds help
 
-## Backup and restore
+    # To-Do
+    ds backup
+    ds restore
+    ds remake
 
-```
-ds backup
-ds backup +data
-ds restore backup-file.tgz
-```
-
+    ds update
+    ds upgrade
+    ```

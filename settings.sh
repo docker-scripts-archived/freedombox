@@ -1,9 +1,9 @@
-APP=freedombox
+APP=freedombox-dev
 
 ### Docker settings.
-IMAGE=freedombox
-CONTAINER=freedombox
-DOMAIN="freedombox.example.org"
+IMAGE=freedombox-dev
+CONTAINER=freedombox-dev
+DOMAIN="fbdev.example.org"
 
 ### Gmail account for notifications. This will be used by ssmtp.
 ### You need to create an application specific password for your account:

@@ -8,11 +8,11 @@ Docker scripts that install and run Freedombox in a container.
      + https://github.com/docker-scripts/ds#installation
      + https://github.com/docker-scripts/wsproxy#installation
 
-  - Then get the scripts from github: `ds pull freedombox`
+  - Then get the scripts from github: `ds pull freedombox dev`
 
-  - Create a directory for the container: `ds init freedombox @freedombox`
+  - Create a directory for the container: `ds init freedombox-dev @fbdev`
 
-  - Fix the settings: `cd /var/ds/freedombox/ ; vim settings.sh`
+  - Fix the settings: `cd /var/ds/fbdev/ ; vim settings.sh`
 
   - Build image, create the container and configure it: `ds make`
 
@@ -20,27 +20,21 @@ Docker scripts that install and run Freedombox in a container.
 
   - Add the domain of freedombox to `wsproxy`: `ds wsproxy add`
 
-  - If the domain is a real one, tell `wsproxy` to get a free
-    letsencrypt.org SSL certificate for it: `ds wsproxy ssl-cert`
+  - Add to `/etc/hosts` the line: `127.0.0.1 fbdev.example.org`
 
-  - If the domain is not a real one, add to `/etc/hosts` the line:
-    `127.0.0.1 freedombox.example.org`
+  - Now you can access the website at: https://fbdev.example.org
 
-  - Now you can access the website at: https://freedombox.example.org
+  - You also need to make a `ds restart` in order for it to work
+    normally.
 
 ## Maintenance
 
     ```
-    ds stop
-    ds start
+    ds restart
     ds shell
     ds help
 
-    # To-Do
-    ds backup
-    ds restore
-    ds remake
-
-    ds update
-    ds upgrade
+    ds setup
+    ds setup install
+    ds inject install-dependencies.sh
     ```

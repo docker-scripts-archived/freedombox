@@ -1,25 +1,12 @@
-FROM debian:buster
-ENV container docker
-
-### install systemd
-RUN apt update && apt -y upgrade
-RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
-RUN apt -y install systemd resolvconf
-RUN systemctl set-default multi-user.target
-RUN ln -s /lib/systemd/systemd /sbin/init
-CMD ["/sbin/init"]
-WORKDIR /host
-
-### install some other packages
-RUN apt -y install cron rsyslog logrotate logwatch ssmtp
+include(buster)
 
 ### install freedombox dependencies
 RUN DEBIAN_FRONTEND=noninteractive \
-        apt -y install freedombox-setup
+        apt install --yes freedombox-setup
 
 ### install development dependencies
 ### see: https://salsa.debian.org/freedombox-team/plinth/blob/master/INSTALL.md
-RUN DEBIAN_FRONTEND=noninteractive apt -y install \
+RUN DEBIAN_FRONTEND=noninteractive apt install --yes \
     augeas-tools \
     dblatex \
     docbook-utils \
